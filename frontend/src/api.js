@@ -31,11 +31,11 @@ export const fetchComment = (postId) =>
     .then(data => data)
 
 export const deleteComment = (commentId) => {
-  fetch(`${api}/comments/${commentId}`, { headers, method: 'DELETE',
+  return fetch(`${api}/comments/${commentId}`, { headers, method: 'DELETE',
   body: JSON.stringify({
     deleted: true,
     })
-  })
+  }).then((res) => res.json())
 }
 export const writePost = (post) => {
   return fetch(`${api}/posts`, { headers, method: 'POST',

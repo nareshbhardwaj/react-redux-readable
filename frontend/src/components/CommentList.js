@@ -74,14 +74,15 @@ class CommentList extends Component {
                                                 editComment(comment)
                                             }
                                         }>
-                                            Edit
+                                            Edit Comment
                                         </a>
+                                        <span>   </span>
                                         <a href="#delete" className="card-link btn btn-outline-danger" onClick={
                                             () => {
                                                 deleteComment(comment)
                                             }
                                         }>
-                                            Delete
+                                            Delete Comment
                                         </a>
                                     </div>
                                 </div>

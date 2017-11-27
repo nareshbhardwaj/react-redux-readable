@@ -116,6 +116,7 @@ class PostDetail extends Component {
                         <a className="btn btn-warning" href={`/editpost/${post.id}`}>
                             Edit POST 
                         </a>
+                        <span>  </span>
                         <a className="btn btn-danger ml-2" href={`#delete`} onClick={() => {
                             API.deletePost(post.id).then(() => {
                                 this.props.deletePost(post.id);
