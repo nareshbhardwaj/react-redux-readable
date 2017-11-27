@@ -114,7 +114,7 @@ class PostDetail extends Component {
 
                     <div className="col mt-2">
                         <a className="btn btn-warning" href={`/editpost/${post.id}`}>
-                            Edit
+                            Edit POST 
                         </a>
                         <a className="btn btn-danger ml-2" href={`#delete`} onClick={() => {
                             API.deletePost(post.id).then(() => {
@@ -124,7 +124,7 @@ class PostDetail extends Component {
 
                             return false;
                         }}>
-                            Delete
+                            Delete POST
                         </a>
                     </div>
 

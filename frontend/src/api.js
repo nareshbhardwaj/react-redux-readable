@@ -111,3 +111,27 @@ export const downVoteComment = (commentId) => {
     })
   }).then((res) => res.json())  
 }
+
+export function editPost(id, postData) {
+  return fetch(`${api}/posts/${id}`, {
+      headers ,
+      method: 'PUT',
+      body: JSON.stringify(postData)
+  })
+      .then((res) => res.json())
+      .catch((e) => {
+          console.log("Error:", e)
+      })
+}
+
+export function editComment(id, commentData) {
+  return fetch(`${api}/comments/${id}`, {
+      headers ,
+      method: 'PUT',
+      body: JSON.stringify(commentData)
+  })
+      .then((res) => res.json())
+      .catch((e) => {
+          console.log("Error:", e)
+      })
+}

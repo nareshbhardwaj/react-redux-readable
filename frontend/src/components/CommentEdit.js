@@ -48,7 +48,7 @@ class CommentEdit extends Component {
                         <form onSubmit={(e) => {
                             e.preventDefault();
 
-                            API.updateComment(comment.id, {
+                            API.editComment(comment.id, {
                                 body: this.body.value,
                                 timestamp: new Date().getTime()
                             }).then((comment) => {

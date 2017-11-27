@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import * as Actions from "../actions";
 import * as API from "../api";
 import * as UUIDV1 from 'uuid/v1';
+import HeaderComponent from './HeaderComponent';
 
 class AddPost extends Component {
     submitForm = (data) => {
@@ -30,6 +31,8 @@ class AddPost extends Component {
 
         return (
             <div>
+                <HeaderComponent
+                    title={category && category !== '' ? `Add post for ${category}` : `Add post`}/>
                 <div className="container mt-2">
                 <div>
                 <form onSubmit={(e) => {
