@@ -7,14 +7,15 @@ class SortComponent extends Component {
 
         return (
             <div>
-                <h6>Sort by:</h6>
+                <span>Sort by : </span>
                 <a href="#score" className="badge badge-primary mr-2"
                    onClick={
                        () => {
                            sortContent('score');
                            return false
                        }
-                   }>{'score |'}</a>
+                   }>{'score'}</a>
+                   <span> </span>
                 <a href="#newest" className="badge badge-primary"
                    onClick={
                        () => {
