@@ -38,7 +38,7 @@ export const deleteComment = (commentId) => {
   })
 }
 export const writePost = (post) => {
-  fetch(`${api}/posts`, { headers, method: 'POST',
+  return fetch(`${api}/posts`, { headers, method: 'POST',
   body: JSON.stringify({
     id: post.id,
     timestamp: post.timestamp,
@@ -47,7 +47,7 @@ export const writePost = (post) => {
     author: post.author,
     category: post.category,
     })
-  })
+  }).then(res => res.json());
 }
 
 export const writeComment = (comment) => {

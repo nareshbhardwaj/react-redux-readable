@@ -7,6 +7,8 @@ import * as Actions from './actions';
 import CategoryList from "./components/CategoryList";
 import PropTypes from 'prop-types';
 import Post from "./components/Post";
+import { Redirect, Route, Switch } from 'react-router-dom';
+import AddPost from "./components/AddPost";
 
 class App extends Component {
 
@@ -30,10 +32,23 @@ class App extends Component {
           <h1 className="App-title">Readable App</h1>
         </header>
 
-    <div className="container">
-                <CategoryList categories={this.props.categories}/>
-    </div>
-    <Post posts={this.props.posts} displayCategory={true}/>
+        <Switch>
+                    <Route exact path="/" render={() => (
+                      <div className="container">
+                         <CategoryList categories={this.props.categories}/>
+                         <a type="button mt-2" className="btn btn-info" href={`/addpost/`}>
+                                       New post
+                                   </a>
+                         <Post posts={this.props.posts} displayCategory={true}/>
+                         </div>
+                    )}
+                    />
+
+        <Route exact path="/addpost/" render={() => (
+                        <AddPost categories={this.props.categories}/>
+                    )}
+                    />
+      </Switch>
 </div>
 
    );
