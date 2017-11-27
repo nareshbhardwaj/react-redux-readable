@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import Post from "./components/Post";
 import { Redirect, Route, Switch } from 'react-router-dom';
 import AddPost from "./components/AddPost";
+import CategoryViewPage from "./components/CategoryViewPage";
 
 class App extends Component {
 
@@ -48,13 +49,22 @@ class App extends Component {
                         <AddPost categories={this.props.categories}/>
                     )}
                     />
+
+        <Route exact path="/:category" render={() => (
+                        <CategoryViewPage posts={this.props.posts}/>
+                    )}
+                    />
+
+        <Route exact path="/addpost/:category" render={(props) => (
+                        <AddPost categories={this.props.categories} location={props.location}/>
+                    )}
+                    />
       </Switch>
 </div>
 
    );
   }
 }
-
 
 function mapStateToProps({categoryreducer,postreducer}) {
   return {
