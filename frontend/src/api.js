@@ -51,7 +51,7 @@ export const writePost = (post) => {
 }
 
 export const writeComment = (comment) => {
-  fetch(`${api}/comments`, { headers, method: 'POST',
+  return fetch(`${api}/comments`, { headers, method: 'POST',
   body: JSON.stringify({
     id: comment.id,
     timestamp: comment.timestamp,
@@ -59,7 +59,7 @@ export const writeComment = (comment) => {
     author: comment.author,
     parentId: comment.parentId,
     })
-  })
+  }).then(res => res.json());
 }
 
 export const updateComment = (id, timestamp, body, author) => {
@@ -73,11 +73,11 @@ export const updateComment = (id, timestamp, body, author) => {
 }
 
 export const deletePost = (postId) => {
-  fetch(`${api}/posts/${postId}`, { headers, method: 'DELETE',
+  return fetch(`${api}/posts/${postId}`, { headers, method: 'DELETE',
   body: JSON.stringify({
     deleted: true,
     })
-  })
+  }).then(res => res.json());
 }
 
 export const upVotePost = (postId) => {
@@ -97,17 +97,17 @@ export const downVotePost = (postId) => {
   }).then((res) => res.json())  
 }
 export const upVoteComment = (commentId) => {
-  fetch(`${api}/comments/${commentId}`, { headers, method: 'POST',
+  return fetch(`${api}/comments/${commentId}`, { headers, method: 'POST',
   body: JSON.stringify({
     option: 'upVote',
     })
-  })
+  }).then((res) => res.json())  
 }
 
 export const downVoteComment = (commentId) => {
-  fetch(`${api}/comments/${commentId}`, { headers, method: 'POST',
+  return fetch(`${api}/comments/${commentId}`, { headers, method: 'POST',
   body: JSON.stringify({
     option: 'downVote',
     })
-  })
+  }).then((res) => res.json())  
 }

@@ -10,6 +10,8 @@ import Post from "./components/Post";
 import { Redirect, Route, Switch } from 'react-router-dom';
 import AddPost from "./components/AddPost";
 import CategoryViewPage from "./components/CategoryViewPage";
+import PostDetail from "./components/PostDetail"
+import CommentEdit from "./components/CommentEdit"
 
 class App extends Component {
 
@@ -59,6 +61,17 @@ class App extends Component {
                         <AddPost categories={this.props.categories} location={props.location}/>
                     )}
                     />
+
+        <Route exact path="/:category/:id" component={() => (
+                        <PostDetail/>
+                    )}
+                    />
+
+                    <Route exact path="/editcomment/:id" component={() => (
+                        <CommentEdit/>
+                    )}
+                    />
+
       </Switch>
 </div>
 
