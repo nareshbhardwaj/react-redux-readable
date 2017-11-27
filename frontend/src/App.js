@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import * as Actions from './actions';
 import CategoryList from "./components/CategoryList";
 import PropTypes from 'prop-types';
+import Post from "./components/Post";
 
 class App extends Component {
 
@@ -13,6 +14,10 @@ class App extends Component {
     API.fetchCategories().then((categories) => {
         this.props.updateCategories(categories);
     });
+
+    API.fetchPosts().then((posts) => {
+      this.props.updatePosts(posts);
+  });
   }
 
 
@@ -28,6 +33,7 @@ class App extends Component {
     <div className="container">
                 <CategoryList categories={this.props.categories}/>
     </div>
+    <Post posts={this.props.posts} displayCategory={true}/>
 </div>
 
    );
@@ -35,15 +41,17 @@ class App extends Component {
 }
 
 
-function mapStateToProps({categoryreducer}) {
+function mapStateToProps({categoryreducer,postreducer}) {
   return {
-      categories: categoryreducer.categories
+      categories: categoryreducer.categories,
+      posts: postreducer.posts
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-      updateCategories: (data) => dispatch(Actions.updateCategories(data))
+      updateCategories: (data) => dispatch(Actions.updateCategories(data)),
+      updatePosts: (data) => dispatch(Actions.updatePosts(data))
   }
 }
 

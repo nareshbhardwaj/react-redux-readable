@@ -81,19 +81,20 @@ export const deletePost = (postId) => {
 }
 
 export const upVotePost = (postId) => {
-  fetch(`${api}/posts/${postId}`, { headers, method: 'POST',
+  return fetch(`${api}/posts/${postId}`, { headers, method: 'POST',
   body: JSON.stringify({
     option: 'upVote',
     })
-  })
+  }).then((res) => res.json()) 
 }
 
+
 export const downVotePost = (postId) => {
-  fetch(`${api}/posts/${postId}`, { headers, method: 'POST',
+  return fetch(`${api}/posts/${postId}`, { headers, method: 'POST',
   body: JSON.stringify({
     option: 'downVote',
     })
-  })
+  }).then((res) => res.json())  
 }
 export const upVoteComment = (commentId) => {
   fetch(`${api}/comments/${commentId}`, { headers, method: 'POST',
