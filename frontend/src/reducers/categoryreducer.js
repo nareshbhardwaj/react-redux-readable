@@ -1,16 +1,10 @@
-import * as Actions from '../actions'
+import { RECEIVE_CATEGORIES } from '../actions/types'
 
-export default (state = {categories: []}, action) => {
-    switch (action.type) {
-        case Actions.CATEGORIES_UPDATE:
-            const {categories} = action;
-
-            return {
-                ...state,
-                categories
-            };
-
-        default:
-            return state;
-    }
-};
+export default (state = [], action) => {
+  switch (action.type) {
+    case RECEIVE_CATEGORIES:
+      return [ ...state, ...action.categories ]
+    default:
+      return state
+  }
+}

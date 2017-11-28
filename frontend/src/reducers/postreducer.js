@@ -1,80 +1,83 @@
-import * as Actions from '../actions'
+import {
+  RECEIVE_POSTS,
+  INCREASE_POST_SCORE,
+  DECREASE_POST_SCORE,
+  ADD_POST,
+  REMOVE_POST,
+  EDIT_POST
+} from '../actions/types'
 
-export default (state = {posts: [], sortMode: 'score'}, action) => {
-    switch (action.type) {
-        case Actions.POSTS_UPDATE: {
-            const {posts} = action;
-
-            return {
-                ...state,
-                posts
-            };
+/*
+$ curl --header "Authorization: xcx"  http://localhost:5001/posts
+[ { "id":"8xf0y6ziyjabvozdd253nd",
+    "timestamp":1467166872634,
+    "title":"Udacity is the best place to learn React",
+    "body":"Everyone says so after all.",
+    "author":"thingtwo",
+    "category":"react",
+    "voteScore":6,
+    "deleted":false
+  },
+  {
+    "id":"6ni6ok3ym7mf1p33lnez",
+    "timestamp":1468479767190,
+    "title":"Learn Redux in 10 minutes!",
+    "body":"Just kidding. It takes more than 10 minutes to learn technology.",
+    "author":"thingone",
+    "category":"redux",
+    "voteScore":-5,
+    "deleted":false
+  } ]
+*/
+export default (state = [], action) => {
+  switch (action.type) {
+    case RECEIVE_POSTS:
+      return action.posts.filter( p => !p.deleted);
+    
+    case INCREASE_POST_SCORE:
+      // find the current post and increment its score
+      return state.map(p => {
+        if (p.id !== action.id) {
+          return p;
         }
-
-        case Actions.POSTS_DELETE: {
-            const {id} = action;
-
-            return {
-                ...state,
-                posts: state.posts.map((post) => {
-                    if (post.id === id) {
-                        post.deleted = true;
-                    }
-
-                    return post;
-                })
-            };
+        return {
+          ...p,
+          voteScore: p.voteScore + 1
         }
+      });
 
-        case Actions.POSTS_EDIT: {
-            const {post} = action;
-
-            return {
-                ...state,
-                posts: state.posts.map((p) => {
-                    if (p.id === post.id) {
-                        p = post;
-                    }
-
-                    return p;
-                })
-            };
+    case DECREASE_POST_SCORE:
+      // find the current post and decrement its score
+      return state.map(p => {
+        if (p.id !== action.id) {
+          return p;
         }
-
-        case Actions.POSTS_VOTE: {
-            const {id, votes} = action;
-
-            return {
-                ...state,
-                posts: state.posts.map((post) => {
-                    if (post.id === id) {
-                        post.voteScore = votes;
-                    }
-
-                    return post;
-                })
-            };
+        return {
+          ...p,
+          voteScore: p.voteScore -1
         }
+      });
 
-        case Actions.POSTS_SORT: {
-            const {sortMode} = action;
+    case ADD_POST:
+      return [ ...state, action.post ];
 
-            return {
-                ...state,
-                sortMode
-            };
+    case REMOVE_POST:
+      return state.filter(p => p.id !== action.id);
+
+    case EDIT_POST:
+      const { post } = action;
+      return state.map(p => {
+        if (p.id !== post.id) {
+          return p;
         }
-
-        case Actions.POSTS_ADD: {
-            const {post} = action;
-
-            return {
-                ...state,
-                posts: state.posts.concat(post)
-            };
+        return {
+          ...p,
+          title: post.title,
+          body: post.body
         }
-
-        default:
-            return state;
-    }
-};
+      });
+    
+    default:
+      return state
+  }
+}
