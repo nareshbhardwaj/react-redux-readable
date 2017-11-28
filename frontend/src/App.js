@@ -96,7 +96,7 @@ class App extends Component {
     this.setState(() => ({
       modalAddCommentOpen: true,
       postId: data.postId
-    }))
+    }));
   }
 
   closeModalAddComment = () => {

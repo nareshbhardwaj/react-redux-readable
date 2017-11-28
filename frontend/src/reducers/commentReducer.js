@@ -56,7 +56,9 @@ export default (initialState = {}, action) => {
     case ADD_COMMENT:
       const aState = { ...initialState }
       const parentId = action.comment.parentId
+      console.debug(aState);
       aState[parentId] = [ ...aState[parentId], action.comment ]
+      console.debug(aState);
       return aState;      
 
     case EDIT_COMMENT:
